@@ -1,23 +1,14 @@
-# Use a Rust base image
-FROM rust:1.55 as builder
+# Use the official Rust image as the base image
+FROM rust:latest
 
-# Create a new directory for the server code
+# Set the working directory inside the container
 WORKDIR /app/server
 
 # Copy the server code to the container
-COPY . .
+COPY ./server .
 
-# Build the server binary
+# Build the server code
 RUN cargo build --release
 
-# Create a new stage for the final image
-FROM debian:buster-slim
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the server binary from the builder stage
-COPY --from=builder /app/server/target/release/server .
-
-# Set the command to run the server
-CMD ["./server"]
+# Set the entrypoint command to run the server
+CMD ["cargo", "run", "--release"]
