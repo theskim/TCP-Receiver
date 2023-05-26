@@ -4,7 +4,7 @@ use tokio::net::TcpListener;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    let addr = "127.0.0.1:8080";
+    let addr = "127.0.0.1:8000";
 
     let listener = TcpListener::bind(addr).await?;
     println!("Server listening on {}", addr);
@@ -26,7 +26,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     // Server sends a response back to the client
     println!("-----------------------");
-    let response = "Arsenal bottled the league";
+    let response = "Retrived";
     socket.write_all(response.as_bytes()).await?;
 
     Ok(())

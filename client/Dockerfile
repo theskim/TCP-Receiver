@@ -1,14 +1,12 @@
-# Use the official Rust image as the base image
-FROM rust:latest
+FROM rust:latest as builder
 
-# Set the working directory inside the container
 WORKDIR /app
+COPY . .
 
-# Copy the client code to the container
-COPY ./client .
-
-# Build the client code
 RUN cargo build --release
 
-# Set the entrypoint command to run the client
-CMD ["cargo", "run", "--release"]
+FROM debian:buster-slim
+WORKDIR /app
+COPY --from=builder /app/target/release/client .
+
+CMD ["./client"]
