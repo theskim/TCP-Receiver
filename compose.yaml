@@ -5,11 +5,20 @@ services:
       context: ./client
     networks:
       - my_network
+    depends_on:
+      - server
+    command:
+      /bin/bash -c "sleep infinity" 
+    cap_add:
+      - NET_ADMIN
   server:
     build:
       context: ./server
+    hostname: server
     networks:
       - my_network
-
+    cap_add:
+      - NET_ADMIN
+    
 networks:
   my_network:

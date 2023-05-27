@@ -5,7 +5,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    let addr = "127.0.0.1:8000";
+    let addr = "server:8000";
 
     // Connect to the server
     let mut stream = TcpStream::connect(addr).await?;

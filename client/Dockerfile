@@ -9,4 +9,4 @@ FROM debian:buster-slim
 WORKDIR /app
 COPY --from=builder /app/target/release/client .
 
-CMD ["./client"]
+# CMD ["./client"]
